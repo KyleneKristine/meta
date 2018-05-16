@@ -5,7 +5,22 @@ Useful regex and json used to update our records using sierra and/or marcedit.
 <br>
 <br>
 
-## Global Updates
+## Export data from MRC
+```python
+import pymarc
+from pymarc import MARCReader
+with open(r'C:/path/file', 'rb') as fh: #Select file containing needed information (ex. C:/Users/name/Desktop/test.mrc)
+  reader = MARCReader(fh)
+  inlist = []
+  for record in reader:
+    try:
+      print(record['010']['a']) #change as needed; line isn't necessary and can be deleted if prefered
+      inlist.append(record['010']['a']+'\n') #repeat record number/subfield change here as well
+    except TypeError:
+      print('Error')
+    with open(r'C:/path/file', 'w') as txt: #different file than above, can create brand new file this way. (ex. C:/Users/name/Desktop/test.txt')
+      txt.writelines(inlist)"
+```
 <br>
 
 <br>
