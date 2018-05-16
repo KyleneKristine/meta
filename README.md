@@ -1,6 +1,6 @@
 Metadata
 ======
-Useful regex and json used to update our records using sierra and/or marcedit.
+Useful regex, python, and json used to update our records using sierra and/or marcedit.
 
 <br>
 <br>
