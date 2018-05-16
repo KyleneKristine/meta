@@ -19,7 +19,7 @@ with open(r'C:/path/file', 'rb') as fh: #Select file containing needed informati
     except TypeError:
       print('Error')
     with open(r'C:/path/file', 'w') as txt: #different file than above, can create brand new file this way. (ex. C:/Users/name/Desktop/test.txt')
-      txt.writelines(inlist)"
+      txt.writelines(inlist)
 ```
 <br>
 
