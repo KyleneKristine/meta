@@ -23,6 +23,70 @@ with open(r'C:/path/file', 'rb') as fh: #Select file containing needed informati
 ```
 <br>
 
+## Exporting for Comparison Sheet
+```python
+import pymarc
+from pymarc import MARCReader
+with open(r'C:\path\file.mrc', 'rb') as fh:
+	reader = MARCReader(fh)
+	inlist = []
+	for record in reader:
+		if record['245'] is not None:
+			title = record['245']['a']
+			if record['245']['b'] is not None:
+				title = title + " " + record['245']['b']
+				inlist.append(title)
+			elif record['245']['b'] is None:
+				inlist.append(title)
+		inlist.append('%')
+		
+		if record['100'] is not None:
+			author = record['100']['a']
+			inlist.append(author)
+		elif record['110'] is not None:
+			author = record['110']['a']
+			inlist.append(author)
+		elif record['700'] is not None:
+			author = record['700']['a']
+			inlist.append(author)
+		elif record['710'] is not None:
+			author = record['710']['a']
+			inlist.append(author)
+		inlist.append('%')
+
+		try:
+			if record['260'] is not None:
+				publisher = record['260']['b']
+				date = record['260']['c']
+				inlist.append(publisher + '%' + date)
+			elif record['264'] is not None:
+				publisher = record['264']['b']
+				date = record['264']['c']
+				inlist.append(publisher + '%' + date)
+		except TypeError:
+			inlist.append('%')
+		inlist.append('%')
+		
+		if record['650'] is not None:
+			subject = record['650']['a']
+			inlist.append(subject)
+		inlist.append('%')
+
+		try:
+			if record['035']['a'] is not None:
+				oclc = record['035']['a']
+				inlist.append(oclc)
+		except TypeError:
+			None
+
+		inlist.append('\n')
+
+		with open(r'C:\path\file.txt', 'w', encoding='utf-8') as txt:
+			txt.writelines(inlist)
+```
+
+
+<br>
 <br>
 
 ## Saved Sierra Queries
